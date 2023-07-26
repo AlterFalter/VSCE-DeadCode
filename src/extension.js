@@ -25,6 +25,16 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
+	
+	var provider = new tree.TreeNodeProvider(context);
+	var deadcodeView = vscode.window.createTreeView( "deadcode-view", { treeDataProvider: provider } );
+	
+	function onStatusBarClicked() {
+		if(deadcodeView.visible === false )
+		{
+			vscode.commands.executeCommand('deadcode-view.focus');
+		}
+	}
 }
 
 // this method is called when your extension is deactivated
